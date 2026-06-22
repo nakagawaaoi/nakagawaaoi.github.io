@@ -1,16 +1,1731 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
-
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>新潟大学 工学部</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aoi Nakagawa | Profile</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2338bdf8' stroke='%2338bdf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'%3E%3C/polygon%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2338bdf8' stroke='%2338bdf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'%3E%3C/polygon%3E%3C/svg%3E">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS resets & Variables */
+        :root {
+            --bg-color: #03030c;
+            --bg-gradient: linear-gradient(135deg, #020207 0%, #060618 100%);
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-sub: #a1a1aa;
+            --accent: #38bdf8;
+            --accent-rgb: 56, 189, 248;
+            --shadow: rgba(0, 0, 0, 0.5);
+            --glass-blur: 16px;
+            --nav-bg: rgba(3, 3, 12, 0.7);
+        }
+        [data-theme="light"] {
+            --bg-color: #f8fafc;
+            --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            --card-bg: rgba(255, 255, 255, 0.65);
+            --card-border: rgba(0, 0, 0, 0.06);
+            --text-main: #0f172a;
+            --text-sub: #475569;
+            --accent: #2563eb;
+            --accent-rgb: 37, 99, 235;
+            --shadow: rgba(0, 0, 0, 0.05);
+            --nav-bg: rgba(248, 250, 252, 0.7);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+            line-height: 1.6;
+        }
+
+        #star-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+            background: var(--nav-bg);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: 0.05em;
+        }
+
+        .logo-svg {
+            color: var(--accent);
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-left: 1px solid var(--card-border);
+            padding-left: 20px;
+        }
+
+        /* Language Toggle Button Group */
+        .lang-group {
+            display: flex;
+            background: var(--card-border);
+            padding: 3px;
+            border-radius: 20px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        /* Theme Toggle Switch */
+        .theme-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            background: var(--card-border);
+        }
+
+        /* Container & Layout */
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 1;
+            scroll-margin-top: 80px;
+        }
+
+        .hero-section {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-reading {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            opacity: 0.85;
+        }
+
+        .hero-name {
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-size: 4.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #38bdf8 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 30px rgba(56, 189, 248, 0.1);
+        }
+
+        .hero-sub {
+            font-size: 1.25rem;
+            color: var(--text-sub);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            z-index: 2;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .scroll-indicator:hover {
+            color: var(--accent);
+            transform: translate(-50%, -2px);
+        }
+
+        .scroll-arrow {
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 10px 30px 0 var(--shadow);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+            scroll-margin-top: 100px;
+        }
+
+        .card.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card.revealed:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px 0 var(--shadow);
+            border-color: rgba(var(--accent-rgb), 0.3);
+        }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 10px;
+        }
+
+        /* Card Content Styles */
+        .profile-list {
+            list-style: none;
+        }
+
+        .profile-list li {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .profile-list strong {
+            color: var(--accent);
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .profile-list span {
+            color: var(--text-main);
+        }
+
+        /* Profile alignment */
+        #profile .profile-list li {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        #profile .profile-list strong {
+            width: 120px;
+            flex-shrink: 0;
+            margin-right: 8px;
+        }
+
+        #profile .profile-list span {
+            flex-grow: 1;
+        }
+
+
+        .edu-period {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--accent);
+            background: rgba(var(--accent-rgb), 0.08);
+            border: 1px solid rgba(var(--accent-rgb), 0.18);
+            padding: 2px 10px;
+            border-radius: 12px;
+            margin-left: 8px;
+            vertical-align: middle;
+            letter-spacing: 0.02em;
+        }
+
+        /* Badges */
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .badge {
+            background: rgba(var(--accent-rgb), 0.08);
+            border: 1px solid rgba(var(--accent-rgb), 0.2);
+            color: var(--text-main);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            background: var(--accent);
+            color: var(--bg-color);
+            transform: scale(1.05);
+            border-color: var(--accent);
+        }
+
+        /* Timelines / Career List */
+        .sub-section {
+            margin-top: 25px;
+            border-top: 1px solid var(--card-border);
+            padding-top: 20px;
+        }
+
+        .sub-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .career-item {
+            margin-bottom: 20px;
+            border-left: 2px solid var(--card-border);
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .career-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .career-date {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            font-weight: 600;
+        }
+
+        .career-text {
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        .career-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 4px;
+        }
+
+        .career-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Links Grid */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 16px;
+            border-radius: 12px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .link-card:hover {
+            background: rgba(var(--accent-rgb), 0.06);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .link-card svg {
+            color: var(--accent);
+        }
+
+        .contact-featured {
+            background: rgba(var(--accent-rgb), 0.03);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .contact-subtitle {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .email-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: var(--bg-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .email-button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.2);
+        }
+
+        .vision-quote {
+            position: relative;
+            padding: 20px 20px 10px 40px;
+        }
+
+        .quote-icon {
+            position: absolute;
+            top: -10px;
+            left: 0;
+            font-size: 4rem;
+            font-family: 'Outfit', sans-serif;
+            color: var(--accent);
+            opacity: 0.25;
+            line-height: 1;
+        }
+
+        .vision-main-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .vision-text {
+            font-size: 1rem;
+            color: var(--text-sub);
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .site-footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 0.05em;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-reading {
+                font-size: 0.8rem;
+                letter-spacing: 0.2em;
+                margin-bottom: 8px;
+            }
+            .hero-name {
+                font-size: 2.8rem;
+            }
+            .hero-sub {
+                font-size: 1rem;
+            }
+            header {
+                padding: 15px 20px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .container {
+                padding: 30px 10px;
+            }
+            .card {
+                padding: 18px 14px;
+                border-radius: 14px;
+                margin-bottom: 20px;
+            }
+            .card-title {
+                font-size: 1.2rem;
+                gap: 8px;
+                margin-bottom: 14px;
+            }
+            .vision-quote {
+                padding: 12px 8px 8px 24px;
+            }
+            .quote-icon {
+                font-size: 2.8rem;
+                top: -6px;
+            }
+            .vision-main-title {
+                font-size: 1.15rem;
+                margin-bottom: 10px;
+            }
+            .vision-text {
+                font-size: 0.9rem;
+                line-height: 1.7;
+            }
+            .profile-list li {
+                margin-bottom: 10px;
+                font-size: 0.88rem;
+            }
+            .edu-period {
+                display: block;
+                margin-left: 0;
+                margin-top: 4px;
+                width: fit-content;
+            }
+            .sub-title {
+                font-size: 1rem;
+            }
+            .career-item {
+                padding-left: 18px;
+            }
+            #vision::before, #lecture::before {
+                border-radius: 14px;
+            }
+            .list-icon-item {
+                gap: 8px;
+                margin-bottom: 14px;
+            }
+            .target-item {
+                padding: 12px;
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        /* Special Glow Border & Animations */
+        #vision, #lecture {
+            position: relative;
+            border-color: transparent !important;
+        }
+
+        #vision::before, #lecture::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            background: linear-gradient(135deg, #38bdf8, #818cf8, #a855f7, #38bdf8);
+            background-size: 300% 300%;
+            border-radius: 20px;
+            z-index: -1;
+            animation: glow-animation 8s linear infinite;
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+
+        [data-theme="light"] #vision::before, [data-theme="light"] #lecture::before {
+            opacity: 0.15;
+        }
+
+        #vision:hover::before, #lecture:hover::before {
+            opacity: 0.8;
+        }
+
+        [data-theme="light"] #vision:hover::before, [data-theme="light"] #lecture:hover::before {
+            opacity: 0.45;
+        }
+
+        @keyframes glow-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* SVG icon alignment in lists */
+        .list-icon-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .list-icon-item svg {
+            color: var(--accent);
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+        .list-icon-content {
+            flex-grow: 1;
+        }
+
+        /* Contact targets grid */
+        .contact-targets {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 25px 0;
+            text-align: left;
+        }
+        @media (max-width: 768px) {
+            .contact-targets {
+                grid-template-columns: 1fr;
+            }
+        }
+        .target-item {
+            background: rgba(var(--accent-rgb), 0.02);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 18px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .target-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(var(--accent-rgb), 0.25);
+        }
+        .target-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .target-title svg {
+            flex-shrink: 0;
+        }
+        .target-desc {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            line-height: 1.5;
+        }
+    </style>
 </head>
-
 <body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.tsx"></script>
-</body>
 
+    <canvas id="star-canvas"></canvas>
+
+    <header>
+        <a href="#" class="logo-container">
+            <svg class="logo-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span>AOI NAKAGAWA</span>
+        </a>
+        <nav>
+            <div class="nav-links">
+                <a href="#vision" data-i18n="vision">ビジョン</a>
+                <a href="#profile" data-i18n="profile">プロフィール</a>
+                <a href="#experience" data-i18n="experience_nav">経歴</a>
+                <a href="#academic" data-i18n="research">学術・研究</a>
+                <a href="#business" data-i18n="business">ビジネス・実務・コミュニティ</a>
+                <a href="#tech" data-i18n="stack">技術スタック</a>
+                <a href="#sports" data-i18n="bg">バックグラウンド</a>
+                <a href="#lecture" data-i18n="lecture_nav">講演・コンサル</a>
+                <a href="#contact" data-i18n="contact_nav">各種SNS/お問い合わせ</a>
+            </div>
+            <div class="controls">
+                <div class="lang-group">
+                    <button class="lang-btn active" onclick="changeLang('ja')">JA</button>
+                    <button class="lang-btn" onclick="changeLang('en')">EN</button>
+                    <button class="lang-btn" onclick="changeLang('zh')">ZH</button>
+                </div>
+                <button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">🌙</button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <span class="hero-reading" id="hero-reading">AOI NAKAGAWA</span>
+        <h1 class="hero-name">中川 碧偉</h1>
+        <div class="scroll-indicator" onclick="scrollToContent()">
+            <span data-i18n="scroll_down">SCROLL DOWN</span>
+            <svg class="scroll-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+        </div>
+    </section>
+
+    <div class="container" id="content-start">
+
+        <!-- Vision / Beliefs Card -->
+        <div class="card" id="vision">
+            <h2 class="card-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+                <span data-i18n="vision_card">ビジョン・想い</span>
+            </h2>
+            <div class="vision-quote">
+                <div class="quote-icon">“</div>
+                <h3 class="vision-main-title" data-i18n="vision_title">技術を社会へ、当たり前の日常へ。</h3>
+                <p class="vision-text" data-i18n="vision_desc">高校生の時に起業家・経営者を志し、現在の協創経営プログラムへ進学しました。OpenAIのChatGPTが2022年11月にリリースされてからわずか3ヶ月後の2023年2月にはすでに触れており、その凄さを知っていました。そして、2025年3月25日にOpenAIから「ChatGPT-4o Image Generation」がリリースされた時、この技術に計り知れない未来を感じ、自身のすべてを注ぎ込むことを決めました。私は、AIのモデル開発そのものを行う立場ではありません。開発者への深い敬意を持ちつつ、私の役割は「最先端の技術をいかに社会へ実装し、人々の日常へ馴染ませ、イノベーションを普及させるか」にあります。アカデミアやテクノロジーの最前線にある便利な技術を、誰もが当たり前に使いこなせる世の中をつくること。それが、私が研究や情報発信活動を通じて目指す未来です。将来的には、組織や企業の意思決定にAIを統合し、イノベーションを経営レベルから牽引する『CAIO（最高AI責任者）』のポジションを見据え、この領域のパイオニアとして邁進していきたいと考えています。</p>
+            </div>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="card" id="profile">
+            <h2 class="card-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span data-i18n="profile">プロフィール</span>
+            </h2>
+            <ul class="profile-list">
+                <li><strong data-i18n="name_lbl">氏名:</strong><span data-i18n="name_val">中川 碧偉</span></li>
+                <li><strong data-i18n="birthday_lbl">生年月:</strong><span data-i18n="birthday_val">2004年7月</span></li>
+                <li><strong data-i18n="origin_lbl">出身:</strong><span data-i18n="origin_val">新潟県新潟市江南区亀田</span></li>
+                <li><strong data-i18n="blood_lbl">血液型:</strong><span data-i18n="blood_val">AB型</span></li>
+                <li><strong data-i18n="mbti_lbl">MBTI:</strong><span data-i18n="mbti_val">ENTP（討論者）</span></li>
+                <li><strong data-i18n="motto_lbl">座右の銘:</strong><span data-i18n="motto_val">為せば成る、為さねば成らぬ何事も、成らぬは人の為さぬなりけり (上杉鷹山)<br>迷ったら心躍る方へ</span></li>
+            </ul>
+        </div>
+
+        <!-- Experience Card -->
+        <div class="card" id="experience">
+            <h2 class="card-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                <span data-i18n="experience">経歴</span>
+            </h2>
+            <ul class="profile-list">
+                <li><strong data-i18n="hs_lbl">高校:</strong><span data-i18n="hs_val">新潟県立新潟江南高等学校</span><span class="edu-period" data-i18n="hs_period">2020年4月 – 2023年3月 卒業</span></li>
+                <li><strong data-i18n="univ_lbl">大学:</strong><span data-i18n="univ_val">新潟大学 工学部 工学科 融合領域分野 協創経営プログラム</span><span class="edu-period" data-i18n="univ_period">2023年4月 入学 – 在学中</span></li>
+                <li><strong data-i18n="grad_lbl">大学院:</strong><span data-i18n="grad_val">新潟大学大学院 総合学術研究科 自然科学専攻 情報社会デザイン科学プログラム</span><span class="edu-period" data-i18n="grad_period">2027年4月 進学予定</span></li>
+            </ul>
+        </div>
+
+        <!-- Academia / Research Card -->
+        <div class="card" id="academic">
+            <h2 class="card-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2.67 3 6 3s6-1 6-3v-5"/></svg>
+                <span data-i18n="research">学術・研究</span>
+            </h2>
+            <ul class="profile-list">
+                <li><strong data-i18n="field_lbl">研究分野:</strong><span data-i18n="field_val">人文・社会 / 経営学 / 技術経営</span></li>
+                <li><strong data-i18n="kw_lbl">研究キーワード:</strong>
+                    <div class="badge-container">
+                        <span class="badge" data-i18n="kw1">生成AI</span>
+                        <span class="badge" data-i18n="kw2">技術経営</span>
+                        <span class="badge" data-i18n="kw3">科学技術政策</span>
+                        <span class="badge" data-i18n="kw4">人工知能（AI）</span>
+                        <span class="badge" data-i18n="kw5">DX</span>
+                        <span class="badge" data-i18n="kw6">イノベーション</span>
+                    </div>
+                </li>
+            </ul>
+            
+            <div class="sub-section">
+                <h3 class="sub-title" data-i18n="presentation_lbl">講演・口頭発表:</h3>
+                <div class="career-item">
+                    <div class="career-date" data-i18n="presentation_date">2026年8月 (予定)</div>
+                    <div class="career-text" style="font-weight: 600; margin-top: 5px;">Leapfrogging or Lock-in: Public-Sector AI Trajectories Under Sovereign Constraint from Asia-Pacific</div>
+                    <div class="career-text" style="font-size: 0.85rem; color: var(--text-sub);" data-i18n="presentation_conf">IEEE Technology and Engineering Management Society 「TEMSCON Global 2026」</div>
+                    <a href="https://ieee-temscon-global.org/2026" class="career-link" target="_blank" style="margin-top: 5px; display: inline-flex;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        TEMSCON Global 2026
+                    </a>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3 class="sub-title" data-i18n="joint_lbl">共同研究実績:</h3>
+                <div class="career-item">
+                    <div class="career-date" data-i18n="joint_date">2025年</div>
+                    <div class="career-text" data-i18n="joint_val">新潟大学工学部・三村研究室、株式会社燕屋および株式会社アイチ金属を通した「砂鉄の採集および金属塗料・デザインに関する共同研究」に従事 (大学3年生時の1年間)</div>
+                    <div style="display: flex; gap: 15px; margin-top: 5px;">
+                        <a href="https://mmrtmmk.com/" class="career-link" target="_blank">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            MIMURA Lab
+                        </a>
+                        <a href="https://aichi-metal.co.jp/" class="career-link" target="_blank">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            AICHI METAL
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3 class="sub-title" data-i18n="ra_lbl">研究関連職歴:</h3>
+                <div class="career-item">
+                    <div class="career-date" data-i18n="ra_date">2025年6月 - 現在</div>
+                    <div class="career-text"><strong data-i18n="ra_org">新潟大学</strong> - <span data-i18n="ra_val">白川先生 リサーチアシスタント (RA)</span></div>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3 class="sub-title" data-i18n="association_lbl">所属学協会:</h3>
+                <div class="career-item">
+                    <div class="career-date" data-i18n="association_date">2026年5月 - 現在</div>
+                    <div class="career-text"><span data-i18n="association_val">IEEE (Institute of Electrical and Electronics Engineers)</span></div>
+                    <a href="https://www.ieee.org/" class="career-link" target="_blank" style="margin-top: 5px; display: inline-flex;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        IEEE
+                    </a>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3 class="sub-title" data-i18n="education_lbl">その他の受講プログラム:</h3>
+                <div class="career-item">
+                    <div class="career-date" data-i18n="education_date">2025年</div>
+                    <div class="career-text" data-i18n="education_val">東京大学 松尾・岩沢研究室が主催する大規模言語モデル(LLM)講座の修了・受講を通じて、LLMの仕組みや実装方法を学習。</div>
+                    <a href="https://weblab.t.u-tokyo.ac.jp/" class="career-link" target="_blank" style="margin-top: 5px; display: inline-flex;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        松尾・岩沢研究室
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Experience Card -->
+        <div class="card" id="business">
+            <h2 class="card-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                <span data-i18n="business">ビジネス・実務・コミュニティ</span>
+            </h2>
+            <div class="career-item">
+                <div class="career-date" data-i18n="biz1_date">2024年5月 - 現在</div>
+                <div class="career-text"><strong>ドコドア株式会社</strong> - <span data-i18n="biz1_desc">長期インターンシップ</span></div>
+                <a href="https://docodoor.co.jp/" class="career-link" target="_blank">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    docodoor, Inc.
+                </a>
+            </div>
+            <div class="career-item">
+                <div class="career-date" data-i18n="biz2_date">2024年 (3ヶ月間)</div>
+                <div class="career-text"><strong>株式会社燕屋</strong> - <span data-i18n="biz2_desc">アルバイト（週1回参画）</span></div>
+                <a href="https://t-tsubameya.com/" class="career-link" target="_blank">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    t-tsubameya
+                </a>
+            </div>
+            <div class="career-item">
+                <div class="career-date" data-i18n="biz3_date">2024年</div>
+                <div class="career-text"><strong>公益社団法人つばめいと</strong> - <span data-i18n="biz3_desc">インターンシップ</span></div>
+                <a href="https://tsubame-sq.jp/" class="career-link" target="_blank">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    つばめいと
+                </a>
+            </div>
+            <div class="career-item">
+                <div class="career-date" data-i18n="biz4_date">2025年 - 現在</div>
+                <div class="career-text"><strong>株式会社DERTA</strong> - <span data-i18n="biz4_desc">大学の授業を通じて半年以上授業を受けていた。今後に向け業務委託契約の交渉を進めている</span></div>
+                <a href="https://derta.co.jp/" class="career-link" target="_blank">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    DERTA
+                </a>
+            </div>
+            <div class="career-item">
+                <div class="career-date" data-i18n="biz5_date">2025年</div>
+                <div class="career-text"><strong>SN@P新潟</strong> - <span data-i18n="biz5_desc">起業家支援コミュニティへ参加</span></div>
+                <a href="https://snap-niigata.co.jp/" class="career-link" target="_blank">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    SN@P新潟
+                </a>
+            </div>
+            <div class="career-item">
+                <div class="career-date" data-i18n="biz6_date">2025年</div>
+                <div class="career-text"><strong data-i18n="biz6_title">Google AI 学生アンバサダー</strong> - <span data-i18n="biz6_desc">学生アンバサダーとして参画</span></div>
+            </div>
+        </div>
+
+        <!-- Tech Stack Card -->
+        <div class="card" id="tech">
+            <h2 class="card-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                <span data-i18n="stack">技術スタック</span>
+            </h2>
+            <ul class="profile-list">
+                <li><strong data-i18n="tech_ai_lbl">開発/AIツール:</strong>
+                    <div class="badge-container">
+                        <span class="badge">Antigravity</span>
+                        <span class="badge">Claude Code</span>
+                        <span class="badge">Gemini</span>
+                        <span class="badge">Claude</span>
+                        <span class="badge">ChatGPT</span>
+                        <span class="badge">NotebookLM</span>
+                        <span class="badge">Google AI Studio</span>
+                        <span class="badge">Notion (Notion AI)</span>
+                        <span class="badge">Spark</span>
+                        <span class="badge">Copilot</span>
+                        <span class="badge">OpenAI Codex</span>
+                    </div>
+                </li>
+                <li style="margin-top: 15px;"><strong data-i18n="tech_os_lbl">OS環境:</strong><span>Mac</span></li>
+                <li><strong data-i18n="license_lbl">保有資格:</strong><span data-i18n="license_val">ITパスポート</span></li>
+            </ul>
+        </div>
+
+        <!-- Background & Hobbies Card -->
+        <div class="card" id="sports">
+            <h2 class="card-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                <span data-i18n="bg">バックグラウンド</span>
+            </h2>
+            <ul class="profile-list">
+                <li><strong data-i18n="sport_lbl">スポーツ遍歴:</strong>
+                    
+                    <div class="list-icon-item" style="margin-top: 15px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <div class="list-icon-content">
+                            <div class="career-date" data-i18n="sp1_date">幼稚園年中 - 中学3年</div>
+                            <div class="career-text"><strong data-i18n="sp1_title">総合格闘技「大道塾 空道」</strong> - <span data-i18n="sp1_desc">武道を通じた自己の人格形成に深く影響。</span></div>
+                            <a href="http://www.daidojuku.com/" class="career-link" target="_blank" style="margin-top: 5px; display: inline-flex;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                大道塾 公式
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="list-icon-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+                        <div class="list-icon-content">
+                            <div class="career-date" data-i18n="sp2_date">中学1年 - 中学3年</div>
+                            <div class="career-text"><strong data-i18n="sp2_title">柔道</strong> - <span data-i18n="sp2_desc">空道での技術向上（投げ・寝技）を目的として所属。新潟県大会3位・4位の実績。</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="list-icon-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+                        <div class="list-icon-content">
+                            <div class="career-date" data-i18n="sp3_date">高校1年 - 高校3年</div>
+                            <div class="career-text"><strong data-i18n="sp3_title">ハンドボール</strong> - <span data-i18n="sp3_desc">全員が同じスタートラインから開始できる団体競技として選択。新潟県大会3位・4位の実績。</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="list-icon-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <div class="list-icon-content">
+                            <div class="career-date" data-i18n="sp4_date">継続中のスポーツ</div>
+                            <div class="career-text"><span data-i18n="sp4_desc">スノーボード (大学より現在も継続中)、筋トレ</span></div>
+                        </div>
+                    </div>
+                </li>
+                <li class="sub-section">
+                    <div class="list-icon-item" style="margin-bottom: 0;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        <div class="list-icon-content">
+                            <strong data-i18n="hobby_lbl">趣味・関心:</strong>
+                            <div class="career-text" style="margin-top:5px;" data-i18n="hobby_desc">映画鑑賞 / 温泉・サウナ / 星座・天体観測 / カフェ巡り / ドライブ / 漫画・アニメ・ドラマ / 麻雀・ダーツ</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Lecture & Consulting Card -->
+        <div class="card" id="lecture">
+            <h2 class="card-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span data-i18n="contact_feat_title">講演会・コンサルティング等のご依頼</span>
+            </h2>
+            <p class="contact-desc" data-i18n="contact_desc">生成AIに関する講演会、個別レクチャー、コンサルティングなどを受け付けています。経営者から官公庁、個人まで、あらゆる方々を対象に以下のようなサポートが可能です。</p>
+            
+            <div class="contact-targets">
+                <!-- 経営者 -->
+                <div class="target-item">
+                    <div class="target-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                        <span data-i18n="target_exec_title">経営者向け</span>
+                    </div>
+                    <div class="target-desc" data-i18n="target_exec_desc">経営戦略への生成AI組み込み、新規事業立案、組織全体のAIリテラシー向上、投資効果(ROI)の最大化</div>
+                </div>
+                <!-- ビジネスマン -->
+                <div class="target-item">
+                    <div class="target-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        <span data-i18n="target_biz_title">ビジネスマン向け</span>
+                    </div>
+                    <div class="target-desc" data-i18n="target_biz_desc">日常業務（企画・メール・資料作成）の高速化、実践的プロンプトの設計、ワークフローの自動化</div>
+                </div>
+                <!-- 官公庁 -->
+                <div class="target-item">
+                    <div class="target-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"></line><line x1="6" y1="18" x2="6" y2="11"></line><line x1="10" y1="18" x2="10" y2="11"></line><line x1="14" y1="18" x2="14" y2="11"></line><line x1="18" y1="18" x2="18" y2="11"></line><polygon points="12 2 2 7 22 7 12 2"></polygon></svg>
+                        <span data-i18n="target_gov_title">官公庁向け</span>
+                    </div>
+                    <div class="target-desc" data-i18n="target_gov_desc">公的ドキュメント作成の迅速化、行政サービスのデジタル化(DX)支援、AI導入ガイドライン構築</div>
+                </div>
+                <!-- 自治体 -->
+                <div class="target-item">
+                    <div class="target-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <span data-i18n="target_local_title">自治体向け</span>
+                    </div>
+                    <div class="target-desc" data-i18n="target_local_desc">地域課題解決へのAI応用、議事録の要約・広報文面作成の自動化、住民向けIT/AI教育支援</div>
+                </div>
+                <!-- 学生 -->
+                <div class="target-item">
+                    <div class="target-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                        <span data-i18n="target_student_title">学生向け</span>
+                    </div>
+                    <div class="target-desc" data-i18n="target_student_desc">NotebookLM等の活用による学習の効率化、論文・レポートの構成支援、AIを用いたキャリア・自己分析</div>
+                </div>
+                <!-- 研究者 -->
+                <div class="target-item">
+                    <div class="target-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <span data-i18n="target_researcher_title">研究者向け</span>
+                    </div>
+                    <div class="target-desc" data-i18n="target_researcher_desc">大量の英語論文・文献の圧倒的サーベイ、研究データの仮説検証・壁打ち、英文添削と翻訳の効率化</div>
+                </div>
+                <!-- 個人・主婦 -->
+                <div class="target-item">
+                    <div class="target-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        <span data-i18n="target_ind_title">主婦・個人向け</span>
+                    </div>
+                    <div class="target-desc" data-i18n="target_ind_desc">日常の悩み解決、家事の効率化、ライフハック、初心者向けChatGPTの手取り足取り個別レクチャー</div>
+                </div>
+            </div>
+
+            <a href="mailto:buruburu859@gmail.com" class="email-button">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span data-i18n="contact_feat_title">講演会・コンサルティング等のご依頼</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contacts / SNS Card -->
+    <div class="card" id="contact">
+        <h2 class="card-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span data-i18n="contact">各種SNS/お問い合わせ(連絡はDMまで)</span>
+        </h2>
+        <div class="links-grid">
+            <a href="https://x.com/qyezu5?s=11&t=MkRs8HPcA68DDfbjfmaHVQ" class="link-card" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+                <span>Twitter (X)</span>
+            </a>
+            <a href="https://www.instagram.com/aoi_.7512?igsh=MmFjZW96ODJycjV3&utm_source=qr" class="link-card" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                <span>Instagram</span>
+            </a>
+            <a href="https://www.facebook.com/share/1EJBGmetNY/?mibextid=wwXIfr" class="link-card" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                <span>Facebook</span>
+            </a>
+            <a href="https://www.youtube.com/@%E3%83%89%E3%82%B3%E3%83%89%E3%82%A2chanel" class="link-card" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                <span>YouTube</span>
+            </a>
+            <a href="https://researchmap.jp/nakagawa_aoi" class="link-card" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                <span>researchmap</span>
+            </a>
+            <a href="https://trend-gadget-now.com/" class="link-card" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                <span>Gadget Blog</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- 各種リンク / フッター -->
+    <footer class="site-footer">
+        <p>&copy; 2026 Aoi Nakagawa. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const i18n = {
+            ja: {
+                vision: "ビジョン",
+                vision_card: "ビジョン・想い",
+                vision_title: "技術を社会へ、当たり前の日常へ。",
+                vision_desc: "高校生の時に起業家・経営者を志し、現在の協創経営プログラムへ進学しました。OpenAIのChatGPTが2022年11月にリリースされてからわずか3ヶ月後の2023年2月にはすでに触れており、その凄さを知っていました。そして、2025年3月25日にOpenAIから「ChatGPT-4o Image Generation」がリリースされた時、この技術に計り知れない未来を感じ、自身のすべてを注ぎ込むことを決めました。私は、AIのモデル開発そのものを行う立場ではありません。開発者への深い敬意を持ちつつ、私の役割は「最先端の技術をいかに社会へ実装し、人々の日常へ馴染ませ、イノベーションを普及させるか」にあります。アカデミアやテクノロジーの最前線にある便利な技術を、誰もが当たり前に使いこなせる世の中をつくること。それが、私が研究や情報発信活動を通じて目指す未来です。将来的には、組織や企業の意思決定にAIを統合し、イノベーションを経営レベルから牽引する『CAIO（最高AI責任者）』のポジションを見据え、この領域のパイオニアとして邁進していきたいと考えています。",
+                profile: "プロフィール",
+                research: "学術・研究",
+                business: "ビジネス・実務・コミュニティ",
+                stack: "技術スタック",
+                bg: "バックグラウンド",
+                contact: "各種SNS/お問い合わせ(連絡はDMまで)",
+                contact_feat_title: "講演会・コンサルティング等のご依頼",
+                contact_desc: "生成AIに関する講演会、手取り足取りの個別レクチャー、企業向け生成AIコンサルなどを受け付けています。経営者向けビジネス導入、官公庁・自治体向け行政活用、研究者・学生向け学術利用、主婦向けライフハックなど、ありとあらゆるターゲットや初心者に対して分かりやすくプロンプトの作り方や活用法をお伝えします。ご連絡はメールまでお気軽にお問い合わせください。",
+                target_exec_title: "経営者向け",
+                target_exec_desc: "経営戦略への生成AI組み込み、新規事業立案、組織全体のAIリテラシー向上、投資効果(ROI)の最大化",
+                target_biz_title: "ビジネスマン向け",
+                target_biz_desc: "日常業務（企画・メール・資料作成）の高速化、実践的プロンプトの設計、ワークフローの自動化",
+                target_gov_title: "官公庁向け",
+                target_gov_desc: "公的ドキュメント作成の迅速化、行政サービスのデジタル化(DX)支援、AI導入ガイドライン構築",
+                target_local_title: "自治体向け",
+                target_local_desc: "地域課題解決へのAI応用、議事録の要約・広報文面作成の自動化、住民向けIT/AI教育支援",
+                target_student_title: "学生向け",
+                target_student_desc: "NotebookLM等の活用による学習の効率化、論文・レポート of 構成支援、AIを用いたキャリア・自己分析",
+                target_researcher_title: "研究者向け",
+                target_researcher_desc: "大量の英語論文・文献の圧倒的サーベイ、研究データの仮説検証・壁打ち、英文添削と翻訳の効率化",
+                target_ind_title: "主婦・個人向け",
+                name_lbl: "氏名:",
+                name_val: "中川 碧偉",
+                origin_lbl: "出身:",
+                origin_val: "新潟県新潟市江南区亀田",
+                hs_lbl: "高校:",
+                hs_val: "新潟県立新潟江南高等学校",
+                hs_period: "2020年4月 – 2023年3月 卒業",
+                univ_lbl: "大学:",
+                univ_val: "新潟大学 工学部 工学科 融合領域分野 協創経営プログラム",
+                univ_period: "2023年4月 入学 – 在学中",
+                grad_lbl: "大学院:",
+                grad_val: "新潟大学大学院 総合学術研究科 自然科学専攻 情報社会デザイン科学プログラム",
+                grad_period: "2027年4月 進学予定",
+                mbti_lbl: "MBTI:",
+                mbti_val: "ENTP（討論者）",
+                birthday_lbl: "生年月:",
+                birthday_val: "2004年7月",
+                blood_lbl: "血液型:",
+                blood_val: "AB型",
+                motto_lbl: "座右の銘:",
+                motto_val: "為せば成る、為さねば成らぬ何事も、成らぬは人の為さぬなりけり (上杉鷹山)<br>迷ったら心躍る方へ",
+                experience: "経歴",
+                experience_nav: "経歴",
+                tech_ai_lbl: "開発/AIツール:",
+                tech_os_lbl: "OS環境:",
+                license_lbl: "保有資格:",
+                license_val: "ITパスポート",
+                field_lbl: "研究分野:",
+                field_val: "人文・社会 / 経営学 / 技術経営",
+                kw_lbl: "研究キーワード:",
+                kw1: "生成AI",
+                kw2: "技術経営",
+                kw3: "科学技術政策",
+                kw4: "人工知能（AI）",
+                kw5: "DX",
+                kw6: "イノベーション",
+                joint_lbl: "共同研究実績:",
+                joint_date: "2025年",
+                joint_val: "新潟大学工学部・三村研究室、株式会社燕屋および株式会社アイチ金属を通した「砂鉄の採集および金属塗料・デザインに関する共同研究」に従事 (大学3年生時の1年間)",
+                presentation_lbl: "講演・口頭発表:",
+                presentation_date: "2026年8月 (予定)",
+                presentation_conf: "IEEE Technology and Engineering Management Society 「TEMSCON Global 2026」",
+                education_lbl: "その他の受講プログラム:",
+                education_date: "2025年",
+                education_val: "東京大学 松尾・岩沢研究室が主催する大規模言語モデル(LLM)講座の修了・受講を通じて、LLM of 仕組みや実装方法を学習。",
+                ra_lbl: "研究職歴・活動実績:",
+                ra_date: "2025年6月 - 現在",
+                ra_org: "新潟大学",
+                ra_val: "白川先生 リサーチアシスタント (RA)",
+                association_lbl: "所属学協会:",
+                association_date: "2026年5月 - 現在",
+                association_val: "IEEE (Institute of Electrical and Electronics Engineers)",
+                biz1_date: "2024年5月 - 現在",
+                biz1_desc: "長期インターンシップ",
+                biz2_date: "2024年 (3ヶ月間)",
+                biz2_desc: "アルバイト（週1回参画）",
+                biz3_date: "2024年",
+                biz3_desc: "インターンシップ",
+                biz4_date: "2025年 - 現在",
+                biz4_desc: "大学の授業を通じて半年以上授業を受けていた。今後に向け業務委託契約の交渉を進めている",
+                biz5_date: "2025年",
+                biz5_desc: "起業家支援コミュニティへ参加",
+                biz6_date: "2025年",
+                biz6_title: "Google AI 学生アンバサダー",
+                biz6_desc: "学生アンバサダーとして参画",
+                sport_lbl: "スポーツ遍歴:",
+                sp1_date: "幼稚園年中 - 中学3年",
+                sp1_title: "総合格闘技「大道塾 空道」",
+                sp1_desc: "武道を通じた自己の人格形成に深く影響。",
+                sp2_date: "中学1年 - 中学3年",
+                sp2_title: "柔道",
+                sp2_desc: "空道での技術向上（投げ・寝技）を目的として所属。新潟県大会3位・4位の実績。",
+                sp3_date: "高校1年 - 高校3年",
+                sp3_title: "ハンドボール",
+                sp3_desc: "全員が同じスタートラインから開始できる団体競技として選択。新潟県大会3位・4位の実績。",
+                sp4_date: "継続中のスポーツ",
+                sp4_desc: "スノーボード (大学より現在も継続中)、筋トレ",
+                hobby_lbl: "趣味・関心:",
+                hobby_desc: "映画鑑賞 / 温泉・サウナ / 星座・天体観測 / カフェ巡り / ドライブ / 漫画・アニメ・ドラマ / 麻雀・ダーツ",
+                scroll_down: "SCROLL DOWN",
+                lecture_nav: "講演・コンサル",
+                contact_nav: "各種SNS/お問い合わせ"
+            },
+            en: {
+                vision: "Vision",
+                vision_card: "Vision & Beliefs",
+                vision_title: "Bringing Technology to Society, Making it the Everyday Standard.",
+                vision_desc: "Ever since high school, I aspired to become an entrepreneur, which led me to study co-creation management at university. I had already started using OpenAI's ChatGPT in February 2023, just three months after its release in November 2022, and was well aware of its incredible potential. Especially on March 25, 2025, when OpenAI released 'ChatGPT-4o Image Generation,' I saw an immense future in this technology and decided to dedicate my all to it. While I deeply respect the engineers who develop underlying AI models, my interest lies elsewhere. My role is to bridge the gap—to implement cutting-edge technology into society, adapt it to people's lives, and drive the diffusion of innovation. I want to take the convenient technologies born in academia and R&D and weave them into the fabric of everyday life, creating a world where everyone uses them as a matter of course. This is the future I aim to build through my research and advocacy. Looking ahead, I aspire to serve as a CAIO (Chief AI Officer), driving organizational and business transformation at the executive level and pioneering the integration of AI and management strategy.",
+                profile: "Profile",
+                research: "Research & Academia",
+                business: "Business, Projects, & Communities",
+                stack: "Tech Stack",
+                bg: "Background & Hobbies",
+                contact: "Social Media / Contact (Please contact via DM)",
+                contact_feat_title: "Lecture & Consulting Requests",
+                contact_desc: "I accept requests for Generative AI lectures, personalized hands-on tutorials, and corporate AI consulting. I provide easy-to-understand guidance on prompt engineering and practical use cases tailored for diverse audiences—including business leaders, government/public agencies, researchers, students, and home makers. Please feel free to reach out via email.",
+                target_exec_title: "For Executives",
+                target_exec_desc: "Integrating Generative AI into management strategy, planning new businesses, improving organizational AI literacy, and maximizing ROI.",
+                target_biz_title: "For Business Professionals",
+                target_biz_desc: "Accelerating daily tasks (planning, emails, documents), designing practical prompts, and automating business workflows.",
+                target_gov_title: "For Government Agencies",
+                target_gov_desc: "Speeding up official document creation, supporting DX in public services, and building AI usage guidelines.",
+                target_local_title: "For Local Municipalities",
+                target_local_desc: "Applying AI to local challenges, automating meeting summaries & public relations, and supporting local IT/AI education.",
+                target_student_title: "For Students",
+                target_student_desc: "Enhancing learning efficiency via tools like NotebookLM, structuring papers & reports, and career/self-analysis support using AI.",
+                target_researcher_title: "For Researchers",
+                target_researcher_desc: "Overwhelming survey of massive English papers, hypothesis testing/brainstorming, and streamlining English editing & translation.",
+                target_ind_title: "For Individuals & Homemakers",
+                target_ind_desc: "Solving daily troubles, automating budget & meal planning, and providing friendly step-by-step ChatGPT tutorials for beginners.",
+                name_lbl: "Name:",
+                name_val: "Aoi Nakagawa",
+                origin_lbl: "Origin:",
+                origin_val: "Kameda, Konan-ku, Niigata City",
+                hs_lbl: "High School:",
+                hs_val: "Niigata Prefectural Niigata Konan High School",
+                hs_period: "Apr 2020 – Mar 2023",
+                univ_lbl: "University:",
+                univ_val: "Co-Creation Management Program, Division of Fusion Fields, Faculty of Engineering, Niigata University",
+                univ_period: "Apr 2023 – Present",
+                grad_lbl: "Graduate:",
+                grad_val: "Information Society Design Science Program, Division of Natural Science, Graduate School of Comprehensive Scientific Research, Niigata University",
+                grad_period: "Apr 2027 (Planned)",
+                mbti_lbl: "MBTI:",
+                mbti_val: "ENTP (Debater)",
+                birthday_lbl: "Birth Month:",
+                birthday_val: "July 2004",
+                blood_lbl: "Blood Type:",
+                blood_val: "AB",
+                motto_lbl: "Motto:",
+                motto_val: "Where there is a will, there is a way. (Yozan Uesugi)<br>When in doubt, follow your heart's excitement.",
+                experience: "Experience",
+                experience_nav: "Experience",
+                tech_ai_lbl: "AI & Dev Tools:",
+                tech_os_lbl: "OS:",
+                license_lbl: "Certifications:",
+                license_val: "IT Passport (National Certificate)",
+                field_lbl: "Research Fields:",
+                field_val: "Humanities & Social Sciences / Business Administration / Management of Technology (MOT)",
+                kw_lbl: "Keywords:",
+                kw1: "Generative AI",
+                kw2: "MOT",
+                kw3: "S&T Policy",
+                kw4: "AI",
+                kw5: "DX",
+                kw6: "Innovation",
+                joint_lbl: "Joint Research:",
+                joint_date: "2025",
+                joint_val: "Engaged in collaborative research on iron sand collection and metallic paint/design through Niigata University Faculty of Engineering (Mimura Lab), Tsubameya, Inc. and AICHI METAL projects for 1 year during the 3rd undergrad year.",
+                presentation_lbl: "Conference Paper:",
+                presentation_date: "Aug 2026 (Scheduled)",
+                presentation_conf: "IEEE Technology and Engineering Management Society 'TEMSCON Global 2026'",
+                education_lbl: "Additional Education:",
+                education_date: "2025",
+                education_val: "Learned LLM mechanisms and implementation through LLM programs offered by the Matsuo-Iwasawa Lab at the University of Tokyo.",
+                ra_lbl: "Research Employment & Activities:",
+                ra_date: "Jun 2025 - Present",
+                ra_org: "Niigata University",
+                ra_val: "Research Assistant (RA) under Prof. Shirakawa",
+                association_lbl: "Academic Memberships:",
+                association_date: "May 2026 - Present",
+                association_val: "IEEE (Institute of Electrical and Electronics Engineers)",
+                biz1_date: "May 2024 - Present",
+                biz1_desc: "Long-term Internship",
+                biz2_date: "2024 (3 Months)",
+                biz2_desc: "Part-time Job (Once a week)",
+                biz3_date: "2024",
+                biz3_desc: "Internship",
+                biz4_date: "2025 - Present",
+                biz4_desc: "Took university classes for over half a year. Currently negotiating freelance contract.",
+                biz5_date: "2025",
+                biz5_desc: "Startup & Entrepreneur Community Member",
+                biz6_date: "2025",
+                biz6_title: "Google AI Student Ambassador",
+                biz6_desc: "Participated as a student ambassador",
+                sport_lbl: "Athletic Background:",
+                sp1_date: "Early childhood - 9th grade",
+                sp1_title: "Mixed Martial Arts 'Daido Juku Kudo'",
+                sp1_desc: "Daido Juku Kudo (Martial Art). Fundamentally shaped personality and values.",
+                sp2_date: "7th - 9th grade",
+                sp2_title: "Judo",
+                sp2_desc: "Judo. Joined for mastering grappling/throwing in Kudo. Placed 3rd/4th in Niigata Prefectural Tournament.",
+                sp3_date: "10th - 12th grade",
+                sp3_title: "Handball",
+                sp3_desc: "Handball. Chosen as a team sport where everyone started from scratch. Placed 3rd/4th in Niigata Prefectural Tournament.",
+                sp4_date: "Active Sports",
+                sp4_desc: "Snowboarding (since university, active), Weight training",
+                hobby_lbl: "Hobbies:",
+                hobby_desc: "Movies / Hot springs & Sauna / Stargazing & Astronomy / Cafe crawling / Driving / Manga, Anime, & TV shows / Mahjong & Darts",
+                scroll_down: "SCROLL DOWN",
+                lecture_nav: "Lectures & Consulting",
+                contact_nav: "SNS / Contact"
+            },
+            zh: {
+                vision: "愿景",
+                vision_card: "愿景与理念",
+                vision_title: "将技术融入社会，成为理所当然的日常标准。",
+                vision_desc: "自高中时代起，我就立志成为一名企业家，这促使我选择进入大学的协创经营项目学习。在OpenAI的ChatGPT于2022年11月发布后的短短三个月，即2023年2月，我就已经接触到它，并深切体会到了它的强大之处。特别是2025年3月25日OpenAI发布“ChatGPT-4o Image Generation”时，我从中感受到了无限的未来可能性，并决定倾注自己的一切。尽管我对从事底层AI模型开发的工程师怀有崇高的敬意，但我的兴趣并不在此。我认为自己的使命是扮演“技术与社会之间的桥梁”——将最前沿的技术引入社会、融入人们的日常生活，并推动创新的普及。我致力于将来自学术界和最前沿的便利技术带给每一个人，创造一个所有人都能理所当然地使用这些便利工具的世界。这正是我通过目前的研究与信息传播活动所追寻的未来。长远来看，我的目标是成为一名CAIO（首席AI官），从经营决策层面推动AI技术的组织落地与战略整合，成为该领域的开拓者。",
+                profile: "个人简介",
+                research: "学术研究",
+                business: "商业实践与社区",
+                stack: "技术栈",
+                bg: "体育与爱好",
+                contact: "社交媒体 / 咨询 (请通过私信联系)",
+                contact_feat_title: "讲座与咨询委托",
+                contact_desc: "接受有关生成式AI讲座、手把手个性化指导以及企业生成式AI咨询的委托。面向企业经营者、政府及公共机关、科研人员、学生、家庭主妇等各类人群及初学者，以简单易懂的方式讲授提示词构建与实用技巧。如有意向，欢迎随时通过电子邮件联系。",
+                target_exec_title: "面向企业经营者",
+                target_exec_desc: "将生成式AI融入经营战略、规划新兴业务、提升组织整体AI素养以及实现投资回报率（ROI）最大化。",
+                target_biz_title: "面向商务人士",
+                target_biz_desc: "加速日常工作（策划、邮件、文档撰写）、设计实用提示词以及实现工作流程自动化。",
+                target_gov_title: "面向政府机关",
+                target_gov_desc: "加快公文撰写速度、支持公共服务的数字化转型（DX）以及构建AI使用规范指南。",
+                target_local_title: "面向地方自治体",
+                target_local_desc: "将AI应用于解决地域性课题、自动生成会议纪要与宣传文案，以及支持面向市民のIT/AI科普教育。",
+                target_student_title: "面向在校学生",
+                target_student_desc: "利用NotebookLM等工具提升学习效率、辅助论文与报告の结构设计，以及利用AI进行职业规划与自我分析。",
+                target_researcher_title: "面向科研人员",
+                target_researcher_desc: "对海量英文论文与文献进行高效整理与检索、科研データの假设检验与灵感碰撞，以及优化英文润色与翻译。",
+                target_ind_title: "面向个人及家庭主妇",
+                target_ind_desc: "解决日常烦恼、自动规划家庭预算与每日膳食，以及为初学者提供手把手のChatGPT入门指导。",
+                name_lbl: "姓名:",
+                name_val: "中川 碧伟",
+                origin_lbl: "籍贯:",
+                origin_val: "新泻县新泻市江南区亀田",
+                hs_lbl: "高中:",
+                hs_val: "新泻县立新泻江南高等学校",
+                hs_period: "2020年4月 – 2023年3月 毕业",
+                univ_lbl: "大学:",
+                univ_val: "新泻大学 工学部 工学科 融合领域分野 协创经营项目",
+                univ_period: "2023年4月 入学 – 在读中",
+                grad_lbl: "研究生:",
+                grad_val: "新泻大学大学院 综合学术研究科 自然科学专攻 信息社会设计科学项目",
+                grad_period: "预计2027年4月入学",
+                mbti_lbl: "MBTI:",
+                mbti_val: "ENTP（辩论家）",
+                birthday_lbl: "出生年月:",
+                birthday_val: "2004年7月",
+                blood_lbl: "血型:",
+                blood_val: "AB型",
+                motto_lbl: "座右之铭:",
+                motto_val: "有志者事竟成。 (上杉鹰山)<br>迷茫时，选择令你心动的一方。",
+                experience: "学历与经历",
+                experience_nav: "经历",
+                tech_ai_lbl: "AI开发工具:",
+                tech_os_lbl: "系统环境:",
+                license_lbl: "持有证书:",
+                license_val: "IT护照（国家资格证书）",
+                field_lbl: "研究领域:",
+                field_val: "人文・社会 / 经营学 / 技术管理",
+                kw_lbl: "研究关键词:",
+                kw1: "生成式AI",
+                kw2: "技术管理",
+                kw3: "科学技术政策",
+                kw4: "人工智能（AI）",
+                kw5: "DX",
+                kw6: "创新",
+                joint_lbl: "共同研究:",
+                joint_date: "2025年",
+                joint_val: "通过新泻大学工学部・三村实验室、株式会社燕屋（Tsubameya, Inc.）及株式会社爱知金属（AICHI METAL）项目参与“砂铁采集及金属涂料与设计”の共同研究 (大三期间为期1年)",
+                presentation_lbl: "学术发表:",
+                presentation_date: "2026年8月 (预定)",
+                presentation_conf: "IEEE Technology and Engineering Management Society「TEMSCON Global 2026」",
+                education_lbl: "其他学术经历:",
+                education_date: "2025年",
+                education_val: "通过受学东京大学松尾・岩泽实验室主办的大规模语言模型（LLM）公开课程，系统学习了LLMの工作机制和开发部署。",
+                ra_lbl: "学术与科研工作经历:",
+                ra_date: "2025年6月 - 至今",
+                ra_org: "新泻大学",
+                ra_val: "白川教授 旗下研究助理 (RA)",
+                association_lbl: "所属学术团体:",
+                association_date: "2026年5月 - 至今",
+                association_val: "IEEE (Institute of Electrical and Electronics Engineers)",
+                biz1_date: "2024年5月 - 至今",
+                biz1_desc: "长期实习生",
+                biz2_date: "2024年 (为期3个月)",
+                biz2_desc: "兼职 (每周工作一天)",
+                biz3_date: "2024年",
+                biz3_desc: "实习",
+                biz4_date: "2025年 - 至今",
+                biz4_desc: "通过大学课程学习了半年以上。目前正在就未来の业务委托合同进行商业谈判",
+                biz5_date: "2025年",
+                biz5_desc: "参与创业者支持社区",
+                biz6_date: "2025年",
+                biz6_title: "Google AI 学生大使",
+                biz6_desc: "作为学生大使参与",
+                sport_lbl: "运动履历:",
+                sp1_date: "幼儿园中班 - 初中三年级",
+                sp1_title: "综合武道「大道塾 空道」",
+                sp1_desc: "综合武道「大道塾 空道」。武道教育在自我人格塑造过程中起到了基石般の作用。",
+                sp2_date: "初中一年级 - 三年级",
+                sp2_title: "柔道",
+                sp2_desc: "柔道。为提升空道中の投技和寝技水平而参与，曾获新泻县大会第3、4名。",
+                sp3_date: "高中一年级 - 三年级",
+                sp3_title: "手球",
+                sp3_desc: "手球。作为全员零起点开始の团体竞技运动项目进行挑战，曾获新泻县大会第3、4名。",
+                sp4_date: "持续进行の运动",
+                sp4_desc: "单板滑雪 (大学开始至今)、健身",
+                hobby_lbl: "兴趣爱好:",
+                hobby_desc: "电影欣赏 / 温泉・桑拿 / 星座・天体观测 / 咖啡馆打卡 / 驾驶出行 / 漫画・动漫・电视剧 / 麻将・飞镖",
+                scroll_down: "SCROLL DOWN",
+                lecture_nav: "讲座与咨询",
+                contact_nav: "社交媒体 / 咨询"
+            }
+        };
+
+        let currentLang = 'ja';
+
+        function changeLang(lang) {
+            currentLang = lang;
+            
+            // Toggle active class on buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase() === lang) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update title
+            document.title = i18n[lang].name_val + " | Profile";
+            
+            // Translate main texts
+            document.querySelector('.hero-name').textContent = i18n[lang].name_val;
+            
+            // Adjust name reading visibility (hide in English to avoid duplicate)
+            const readingEl = document.getElementById('hero-reading');
+            if (readingEl) {
+                if (lang === 'en') {
+                    readingEl.style.display = 'none';
+                } else {
+                    readingEl.style.display = 'block';
+                }
+            }
+
+            // Translate data-i18n items
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[lang][key]) {
+                    el.innerHTML = i18n[lang][key];
+                }
+            });
+        }
+
+        // Theme Toggle (Dark / Light)
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            
+            const btn = document.getElementById('theme-toggle');
+            if (newTheme === 'light') {
+                btn.textContent = '☀️';
+            } else {
+                btn.textContent = '🌙';
+            }
+        }
+
+        // Smooth Scroll to Content
+        function scrollToContent() {
+            const target = document.getElementById('content-start');
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Interactive Starfield Animation
+        const canvas = document.getElementById('star-canvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        let shootingStars = [];
+
+        class ShootingStar {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width * 0.8;
+                this.y = 0;
+                this.length = Math.random() * 80 + 50;
+                this.speed = Math.random() * 6 + 4;
+                this.angle = Math.PI / 4; // 45 degrees
+                this.opacity = Math.random() * 0.4 + 0.3;
+            }
+            draw() {
+                const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                ctx.strokeStyle = isLight 
+                    ? `rgba(37, 99, 235, ${this.opacity * 0.7})` 
+                    : `rgba(56, 189, 248, ${this.opacity})`;
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x + Math.cos(this.angle) * this.length, this.y + Math.sin(this.angle) * this.length);
+                ctx.stroke();
+            }
+            update() {
+                this.x += this.speed * Math.cos(this.angle);
+                this.y += this.speed * Math.sin(this.angle);
+                if (this.x > canvas.width || this.y > canvas.height) {
+                    this.reset();
+                }
+            }
+        }
+        const starCount = 80;
+        let mouse = { x: null, y: null, radius: 150 };
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Star {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.baseX = this.x;
+                this.baseY = this.y;
+                this.density = (Math.random() * 30) + 15;
+                this.color = `rgba(255, 255, 255, ${Math.random() * 0.7 + 0.3})`;
+            }
+            draw() {
+                const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                ctx.fillStyle = isLight ? 'rgba(37, 99, 235, 0.4)' : this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            update() {
+                if (mouse.x !== null && mouse.y !== null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    let forceDirectionX = dx / distance;
+                    let forceDirectionY = dy / distance;
+                    let maxDistance = mouse.radius;
+                    let force = (maxDistance - distance) / maxDistance;
+                    let directionX = forceDirectionX * force * this.density;
+                    let directionY = forceDirectionY * force * this.density;
+                    
+                    if (distance < mouse.radius) {
+                        this.x -= directionX;
+                        this.y -= directionY;
+                    } else {
+                        if (this.x !== this.baseX) {
+                            let dx = this.x - this.baseX;
+                            this.x -= dx / 20;
+                        }
+                        if (this.y !== this.baseY) {
+                            let dy = this.y - this.baseY;
+                            this.y -= dy / 20;
+                        }
+                    }
+                } else {
+                    if (this.x !== this.baseX) {
+                        let dx = this.x - this.baseX;
+                        this.x -= dx / 20;
+                    }
+                    if (this.y !== this.baseY) {
+                        let dy = this.y - this.baseY;
+                        this.y -= dy / 20;
+                    }
+                }
+            }
+        }
+
+        function init() {
+            stars = [];
+            for (let i = 0; i < starCount; i++) {
+                stars.push(new Star());
+            }
+            shootingStars = [new ShootingStar(), new ShootingStar()];
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < stars.length; i++) {
+                stars[i].draw();
+                stars[i].update();
+            }
+            for (let i = 0; i < shootingStars.length; i++) {
+                shootingStars[i].draw();
+                shootingStars[i].update();
+            }
+            connectStars();
+            requestAnimationFrame(animate);
+        }
+
+        function connectStars() {
+            let opacityValue = 1;
+            for (let a = 0; a < stars.length; a++) {
+                for (let b = a; b < stars.length; b++) {
+                    let dx = stars[a].x - stars[b].x;
+                    let dy = stars[a].y - stars[b].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 100) {
+                        opacityValue = 1 - (distance / 100);
+                        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                        ctx.strokeStyle = isLight 
+                            ? `rgba(37, 99, 235, ${opacityValue * 0.15})` 
+                            : `rgba(255, 255, 255, ${opacityValue * 0.12})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(stars[a].x, stars[a].y);
+                        ctx.lineTo(stars[b].x, stars[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        window.addEventListener('mouseout', function() {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        // Initialize Animation
+        init();
+        animate();
+
+        // Scroll Reveal Observer
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.05 });
+
+        document.querySelectorAll('.card').forEach(card => {
+            revealObserver.observe(card);
+        });
+    </script>
+</body>
 </html>
