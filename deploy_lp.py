@@ -30,13 +30,36 @@ print(f"[*] Reading index.html from {index_html_path}...")
 with open(index_html_path, 'r', encoding='utf-8') as f:
     html_content = f.read()
 
-# WordPressテンプレートとしてのヘッダーを付与する
-PAGE_1_TEMPLATE = """<?php
-/*
-Template Name: Aoi Nakagawa Profile
-*/
-?>
-""" + html_content
+PAGE_1_TEMPLATE = ""
+
+def upload_favicon():
+    print("[0] favicon.jpg を WordPress にアップロード中...")
+    favicon_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "favicon.jpg")
+    if not os.path.exists(favicon_path):
+        print("  ⚠️ favicon.jpg がローカルに見つかりません。デフォルトのパスを使用します。")
+        return None
+    
+    upload_url = f"{WP_URL}/wp-json/wp/v2/media"
+    upload_headers = {
+        'Authorization': headers['Authorization'],
+        'Content-Disposition': 'attachment; filename=favicon.jpg',
+        'Content-Type': 'image/jpeg'
+    }
+    
+    try:
+        with open(favicon_path, 'rb') as img_file:
+            img_data = img_file.read()
+        res = requests.post(upload_url, headers=upload_headers, data=img_data, timeout=20)
+        if res.status_code == 201:
+            media_url = res.json()["source_url"]
+            print(f"  ✅ アップロード成功！ URL: {media_url}")
+            return media_url
+        else:
+            print(f"  ❌ アップロード失敗: {res.status_code} {res.text}")
+            return None
+    except Exception as e:
+        print(f"  ❌ エラー: {e}")
+        return None
 def create_wp_page():
     print("[1] スラッグ「1-2」の固定ページを確認中...")
     pages_url = f"{WP_URL}/wp-json/wp/v2/pages?slug=1-2&status=any"
@@ -144,6 +167,22 @@ def html_unescape(s):
     return s
 
 if __name__ == "__main__":
+    # WordPress に favicon.jpg をアップロードし、HTML内のパスを置換する
+    favicon_url = upload_favicon()
+    if favicon_url:
+        print(f"[*] html 内の 'favicon.jpg' を {favicon_url} に置換します。")
+        html_content = html_content.replace("favicon.jpg", favicon_url)
+    else:
+        print("[*] 警告: favicon.jpg のアップロードに失敗したため、相対パスのままデプロイします。")
+        
+    # 置換された html_content でテンプレートを組み立てる
+    PAGE_1_TEMPLATE = """<?php
+/*
+Template Name: Aoi Nakagawa Profile
+*/
+?>
+""" + html_content
+
     page_id = create_wp_page()
     if page_id:
         success = deploy_template()
