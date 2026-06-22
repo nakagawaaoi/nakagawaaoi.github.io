@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #005696;
+  --color-secondary: #E0E0E0;
+  --font-sans: 'Inter', 'Noto Sans JP', sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: white;
+    color: var(--color-slate-800);
+  }
+}
