@@ -175,6 +175,11 @@ if __name__ == "__main__":
     else:
         print("[*] 警告: favicon.jpg のアップロードに失敗したため、相対パスのままデプロイします。")
         
+    # WordPress 用に wp_head() と wp_footer() を動的に挿入する
+    print("[*] WordPress 用の wp_head() と wp_footer() を挿入します。")
+    html_content = html_content.replace("</head>", "<?php wp_head(); ?>\n</head>")
+    html_content = html_content.replace("</body>", "<?php wp_footer(); ?>\n</body>")
+
     # 置換された html_content でテンプレートを組み立てる
     PAGE_1_TEMPLATE = """<?php
 /*
