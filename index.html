@@ -327,6 +327,46 @@
             padding-bottom: 10px;
         }
 
+        /* Profile photo */
+        .profile-flex {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .profile-photo {
+            width: 190px;
+            height: auto;
+            aspect-ratio: 691 / 800;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 10px 30px var(--shadow);
+            flex-shrink: 0;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .profile-photo:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px var(--shadow);
+        }
+
+        .profile-flex .profile-list {
+            flex: 1;
+            min-width: 0;
+        }
+
+        @media (max-width: 700px) {
+            .profile-flex {
+                flex-direction: column;
+                align-items: center;
+                gap: 24px;
+            }
+            .profile-photo {
+                width: 165px;
+            }
+        }
+
         /* Card Content Styles */
         .profile-list {
             list-style: none;
@@ -824,6 +864,8 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 <span data-i18n="profile">プロフィール</span>
             </h2>
+            <div class="profile-flex">
+            <img src="profile_photo.jpg" alt="中川 碧偉 / Aoi Nakagawa" class="profile-photo" width="691" height="800" loading="lazy">
             <ul class="profile-list">
                 <li><strong data-i18n="name_lbl">氏名:</strong><span data-i18n="name_val">中川 碧偉</span></li>
                 <li><strong data-i18n="birthday_lbl">生年月:</strong><span data-i18n="birthday_val">2004年7月</span></li>
@@ -832,6 +874,7 @@
                 <li><strong data-i18n="mbti_lbl">MBTI:</strong><span data-i18n="mbti_val">ENTP（討論者）</span></li>
                 <li><strong data-i18n="motto_lbl">座右の銘:</strong><span data-i18n="motto_val">為せば成る、為さねば成らぬ何事も、成らぬは人の為さぬなりけり (上杉鷹山)<br>迷ったら心躍る方へ</span></li>
             </ul>
+            </div>
         </div>
 
         <!-- Experience Card -->
@@ -884,10 +927,19 @@
             </ul>
             
             <div class="sub-section">
+                <h3 class="sub-title" data-i18n="lab_lbl">所属研究室:</h3>
+                <div class="career-item">
+                    <div class="career-date" data-i18n="lab_date">2026年4月 - 現在</div>
+                    <div class="career-text"><strong data-i18n="lab_org">新潟大学 工学部</strong> - <span data-i18n="lab_val">原田・白川研究室</span></div>
+                </div>
+            </div>
+
+            <div class="sub-section">
                 <h3 class="sub-title" data-i18n="presentation_lbl">講演・口頭発表:</h3>
                 <div class="career-item">
-                    <div class="career-date" data-i18n="presentation_date">2026年8月 (予定)</div>
+                    <div class="career-date" data-i18n="presentation_date">2026年8月</div>
                     <div class="career-text" style="font-weight: 600; margin-top: 5px;">Leapfrogging or Lock-in: Public-Sector AI Trajectories Under Sovereign Constraint from Asia-Pacific</div>
+                    <div class="career-text" style="font-size: 0.85rem; color: var(--accent); margin-top: 3px;" data-i18n="presentation_authors">筆頭著者 — Aoi Nakagawa, Nobuyuki Shirakawa, Yoshimi Harada</div>
                     <div class="career-text" style="font-size: 0.85rem; color: var(--text-sub);" data-i18n="presentation_conf">IEEE Technology and Engineering Management Society 「TEMSCON Global 2026」</div>
                     <a href="https://ieee-temscon-global.org/2026" class="career-link" target="_blank" style="margin-top: 5px; display: inline-flex;">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -899,12 +951,16 @@
             <div class="sub-section">
                 <h3 class="sub-title" data-i18n="joint_lbl">共同研究実績:</h3>
                 <div class="career-item">
-                    <div class="career-date" data-i18n="joint_date">2025年</div>
+                    <div class="career-date" data-i18n="joint_date">2025年4月 - 2026年3月</div>
                     <div class="career-text" data-i18n="joint_val">新潟大学工学部・三村研究室、株式会社燕屋および株式会社アイチ金属を通した「砂鉄の採集および金属塗料・デザインに関する共同研究」に従事 (大学3年生時の1年間)</div>
                     <div style="display: flex; gap: 15px; margin-top: 5px;">
                         <a href="https://mmrtmmk.com/" class="career-link" target="_blank">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                             MIMURA Lab
+                        </a>
+                        <a href="https://t-tsubameya.com/" class="career-link" target="_blank">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            t-tsubameya
                         </a>
                         <a href="https://aichi-metal.co.jp/" class="career-link" target="_blank">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -919,6 +975,11 @@
                 <div class="career-item">
                     <div class="career-date" data-i18n="ra_date">2025年6月 - 現在</div>
                     <div class="career-text"><strong data-i18n="ra_org">新潟大学</strong> - <span data-i18n="ra_val">白川先生 リサーチアシスタント (RA)</span></div>
+                    <div class="career-text" style="font-size: 0.85rem; color: var(--text-sub); margin-top: 5px;" data-i18n="ra_desc">アジア生産性機構（APO）からの受託研究「Enhancing Productivity in the Public Sector through AI Adoption」に従事。</div>
+                    <a href="https://www.apo-tokyo.org/" class="career-link" target="_blank" style="margin-top: 5px; display: inline-flex;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        Asian Productivity Organization (APO)
+                    </a>
                 </div>
             </div>
 
@@ -1264,19 +1325,25 @@
                 kw4: "人工知能（AI）",
                 kw5: "DX",
                 kw6: "イノベーション",
+                lab_lbl: "所属研究室:",
+                lab_date: "2026年4月 - 現在",
+                lab_org: "新潟大学 工学部",
+                lab_val: "原田・白川研究室",
                 joint_lbl: "共同研究実績:",
-                joint_date: "2025年",
+                joint_date: "2025年4月 - 2026年3月",
                 joint_val: "新潟大学工学部・三村研究室、株式会社燕屋および株式会社アイチ金属を通した「砂鉄の採集および金属塗料・デザインに関する共同研究」に従事 (大学3年生時の1年間)",
                 presentation_lbl: "講演・口頭発表:",
-                presentation_date: "2026年8月 (予定)",
+                presentation_date: "2026年8月",
+                presentation_authors: "筆頭著者 — Aoi Nakagawa, Nobuyuki Shirakawa, Yoshimi Harada",
                 presentation_conf: "IEEE Technology and Engineering Management Society 「TEMSCON Global 2026」",
                 education_lbl: "その他の受講プログラム:",
                 education_date: "2025年",
-                education_val: "東京大学 松尾・岩沢研究室が主催する大規模言語モデル(LLM)講座の修了・受講を通じて、LLM of 仕組みや実装方法を学習。",
-                ra_lbl: "研究職歴・活動実績:",
+                education_val: "東京大学 松尾・岩沢研究室が主催する大規模言語モデル(LLM)講座の修了・受講を通じて、LLMの仕組みや実装方法を学習。",
+                ra_lbl: "研究関連職歴:",
                 ra_date: "2025年6月 - 現在",
                 ra_org: "新潟大学",
                 ra_val: "白川先生 リサーチアシスタント (RA)",
+                ra_desc: "アジア生産性機構（APO）からの受託研究「Enhancing Productivity in the Public Sector through AI Adoption」に従事。",
                 association_lbl: "所属学協会:",
                 association_date: "2026年5月 - 現在",
                 association_val: "IEEE (Institute of Electrical and Electronics Engineers)",
@@ -1378,11 +1445,16 @@
                 kw4: "AI",
                 kw5: "DX",
                 kw6: "Innovation",
+                lab_lbl: "Laboratory Affiliation:",
+                lab_date: "Apr 2026 - Present",
+                lab_org: "Niigata University, Faculty of Engineering",
+                lab_val: "Harada & Shirakawa Laboratory",
                 joint_lbl: "Joint Research:",
-                joint_date: "2025",
+                joint_date: "Apr 2025 - Mar 2026",
                 joint_val: "Engaged in collaborative research on iron sand collection and metallic paint/design through Niigata University Faculty of Engineering (Mimura Lab), Tsubameya, Inc. and AICHI METAL projects for 1 year during the 3rd undergrad year.",
                 presentation_lbl: "Conference Paper:",
-                presentation_date: "Aug 2026 (Scheduled)",
+                presentation_date: "Aug 2026",
+                presentation_authors: "First Author — Aoi Nakagawa, Nobuyuki Shirakawa, Yoshimi Harada",
                 presentation_conf: "IEEE Technology and Engineering Management Society 'TEMSCON Global 2026'",
                 education_lbl: "Additional Education:",
                 education_date: "2025",
@@ -1391,6 +1463,7 @@
                 ra_date: "Jun 2025 - Present",
                 ra_org: "Niigata University",
                 ra_val: "Research Assistant (RA) under Prof. Shirakawa",
+                ra_desc: "Engaged in “Enhancing Productivity in the Public Sector through AI Adoption,” commissioned by the Asian Productivity Organization (APO).",
                 association_lbl: "Academic Memberships:",
                 association_date: "May 2026 - Present",
                 association_val: "IEEE (Institute of Electrical and Electronics Engineers)",
@@ -1492,19 +1565,25 @@
                 kw4: "人工智能（AI）",
                 kw5: "DX",
                 kw6: "创新",
+                lab_lbl: "所属研究室:",
+                lab_date: "2026年4月 - 至今",
+                lab_org: "新泻大学 工学部",
+                lab_val: "原田・白川研究室",
                 joint_lbl: "共同研究:",
-                joint_date: "2025年",
-                joint_val: "通过新泻大学工学部・三村实验室、株式会社燕屋（Tsubameya, Inc.）及株式会社爱知金属（AICHI METAL）项目参与“砂铁采集及金属涂料与设计”の共同研究 (大三期间为期1年)",
+                joint_date: "2025年4月 - 2026年3月",
+                joint_val: "通过新泻大学工学部・三村实验室、株式会社燕屋（Tsubameya, Inc.）及株式会社爱知金属（AICHI METAL）项目参与“砂铁采集及金属涂料与设计”的共同研究 (大三期间为期1年)",
                 presentation_lbl: "学术发表:",
-                presentation_date: "2026年8月 (预定)",
+                presentation_date: "2026年8月",
+                presentation_authors: "第一作者 — Aoi Nakagawa, Nobuyuki Shirakawa, Yoshimi Harada",
                 presentation_conf: "IEEE Technology and Engineering Management Society「TEMSCON Global 2026」",
                 education_lbl: "其他学术经历:",
                 education_date: "2025年",
-                education_val: "通过受学东京大学松尾・岩泽实验室主办的大规模语言模型（LLM）公开课程，系统学习了LLMの工作机制和开发部署。",
+                education_val: "通过受学东京大学松尾・岩泽实验室主办的大规模语言模型（LLM）公开课程，系统学习了LLM的工作机制和开发部署。",
                 ra_lbl: "学术与科研工作经历:",
                 ra_date: "2025年6月 - 至今",
                 ra_org: "新泻大学",
                 ra_val: "白川教授 旗下研究助理 (RA)",
+                ra_desc: "参与亚洲生产力组织（APO）委托研究“Enhancing Productivity in the Public Sector through AI Adoption”。",
                 association_lbl: "所属学术团体:",
                 association_date: "2026年5月 - 至今",
                 association_val: "IEEE (Institute of Electrical and Electronics Engineers)",
