@@ -2,7 +2,7 @@
 
 中川碧偉の個人プロフィールサイト。**GitHub Pages で公開中**：https://nakagawaaoi.github.io/
 
-> **このファイル（`AGENTS.md`）が実体。** `CLAUDE.md` と `GEMINI.md` はここへのシンボリックリンク。
+> **このファイル（`AGENTS.md`）が実体。** `GEMINI.md` はここへのシンボリックリンク。`CLAUDE.md` は置かない（Claude Code は v2.1.277 以降 `AGENTS.md` を直接読む。2026-09-20 にリンクを撤去）。
 > 1つ直せば Claude Code / Antigravity(agy) / Gemini 全部に反映される。
 
 ---
