@@ -797,6 +797,10 @@
             line-height: 1.5;
         }
 
+        .title-link { color: inherit; text-decoration: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s, transform .2s; }
+        .title-link-icon { opacity: .6; transition: opacity .2s, transform .2s; }
+        .title-link:hover, .title-link:focus-visible { color: var(--accent); border-bottom-color: var(--accent); transform: translateY(-2px); }
+        .title-link:hover .title-link-icon, .title-link:focus-visible .title-link-icon { opacity: 1; transform: translate(2px, -2px); }
     </style>
 </head>
 <body>
@@ -917,7 +921,7 @@
         <div class="card" id="academic">
             <h2 class="card-title">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2.67 3 6 3s6-1 6-3v-5"/></svg>
-                <span data-i18n="research">学術・研究</span>
+                <a href="https://researchmap.jp/nakagawa_aoi" target="_blank" rel="noopener" class="title-link" title="researchmap"><span data-i18n="research">学術・研究</span> <svg class="title-link-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
             </h2>
             <ul class="profile-list">
                 <li><strong data-i18n="field_lbl">研究分野:</strong><span data-i18n="field_val">人文・社会 / 経営学 / 技術経営</span></li>
@@ -1081,6 +1085,7 @@
                         <span class="badge">ChatGPT</span>
                         <span class="badge">Gemini</span>
                         <span class="badge">Claude</span>
+                        <span class="badge">Muse</span>
                         <span class="badge">OpenAI Codex</span>
                         <span class="badge">Google Antigravity</span>
                         <span class="badge">Claude Code</span>
